@@ -50,9 +50,9 @@ function State() {
 
     // cached config values
     this.cachedConfig = {
-        trigger: TriggerValues.FullscreenOnly,
-        newDesktopPosition: NewDesktopPositionValue.RightMost,
-        keepNonEmptyDesktop: false,
+        trigger: TriggerValues.MaximizeOnly,
+        newDesktopPosition: NewDesktopPositionValue.NextToCurrent,
+        keepNonEmptyDesktop: true,
         blockWMClass: []
     };
 
@@ -64,7 +64,7 @@ function State() {
         this.cachedConfig.blockWMClass = config.blockWMClass();
     };
 
-    this.reload();
+    // this.reload();
 }
 
 State.prototype.isTriggeredByFull = function() {
@@ -170,8 +170,10 @@ function Main() {
                 return;
             }
             if (h && v) {
+                client.noBorder = true;
                 self.moveToNewDesktop(client);
             } else {
+                client.noBorder = false;
                 self.moveBack(client);
             }
             self.state.debugDump();
