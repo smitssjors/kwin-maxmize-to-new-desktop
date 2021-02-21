@@ -187,6 +187,7 @@ function Main() {
                 log('handle remove return');
                 return;
             }
+            client.noBorder = false
             self.moveBack(client, true);
             self.state.debugDump();
             log('handle remove done');
